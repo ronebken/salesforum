@@ -1,52 +1,139 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="de">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Booking Application</title>
     <link rel="stylesheet" href="styles.css">
+    <title>Buchungssystem</title>
+    <style>
+        body { font-family: Arial, sans-serif; padding: 20px; }
+        #booking { display: none; margin-top: 20px; }
+        #session-selection { display: block; }
+        button { margin: 5px; padding: 10px; }
+    </style>
 </head>
 <body>
-    <div class="container">
-        <h1>Breakout Session Booking</h1>
-        <form id="bookingForm">
-            <div class="form-group">
-                <label for="name">Name:</label>
-                <input type="text" id="name" name="name" required>
-            </div>
-            
-            <div class="form-group">
-                <label for="brand">Select Brand:</label>
-                <select id="brand" name="brand" required>
-                    <option value="" disabled selected>Select your brand</option>
-                    <option value="brand1">Brand 1</option>
-                    <option value="brand2">Brand 2</option>
-                </select>
-            </div>
-
-            <div class="form-group">
-                <label>Choose up to 4 Breakout Sessions:</label>
-                <div class="session-option">
-                    <input type="checkbox" id="session1" name="session" value="Breakout Session 1">
-                    <label for="session1">Breakout Session 1 (<span id="slots-session1">12</span> slots left)</label>
-                </div>
-                <div class="session-option">
-                    <input type="checkbox" id="session2" name="session" value="Breakout Session 2">
-                    <label for="session2">Breakout Session 2 (<span id="slots-session2">12</span> slots left)</label>
-                </div>
-                <div class="session-option">
-                    <input type="checkbox" id="session3" name="session" value="Breakout Session 3">
-                    <label for="session3">Breakout Session 3 (<span id="slots-session3">12</span> slots left)</label>
-                </div>
-                <div class="session-option">
-                    <input type="checkbox" id="session4" name="session" value="Breakout Session 4">
-                    <label for="session4">Breakout Session 4 (<span id="slots-session4">12</span> slots left)</label>
-                </div>
-            </div>
-
-            <button type="submit" class="submit-button">Book Now</button>
-        </form>
+    <h1>Buchungssystem</h1>
+   
+    <div id="user-info">
+        <label for="username">Name:</label>
+        <input type="text" id="username" placeholder="Gib deinen Namen ein">
+       
+        <label for="user-group">Bereich:</label>
+        <select id="user-group" onchange="handleGroupChange()">
+            <option value="">-- Wähle deinen Bereich --</option>
+            <option value="S&E">S&E</option>
+            <option value="R&E">R&E</option>
+        </select>
     </div>
-    <script src="script.js"></script>
+   
+    <div id="booking">
+        <h2>Wähle deine Sessions</h2>
+        <div id="selected-sessions"></div>
+        <div id="session-selection">
+            <p id="slot-message"></p>
+            <div id="session-slots"></div>
+        </div>
+        <button id="confirm-button" style="display: none;" onclick="confirmBooking()">Buchen</button>
+    </div>
+ 
+    <script>
+        let sessionSlots = { 1: "", 2: "", 3: "", 4: "" };
+        let mandatorySession = "Territory Management";
+ 
+        function handleGroupChange() {
+            let userGroup = document.getElementById("user-group").value;
+            document.getElementById("booking").style.display = userGroup ? "block" : "none";
+           
+            if (userGroup === "R&E") {
+                sessionSlots[1] = "";
+                sessionSlots[2] = "";
+            }
+ 
+            updateSelectedSessions();
+            loadSlot(1);
+        }
+ 
+        function loadSlot(slotNumber) {
+            if (Object.values(sessionSlots).every(s => s)) {
+                document.getElementById("session-selection").style.display = "none";
+                return;
+            } else {
+                document.getElementById("session-selection").style.display = "block";
+            }
+           
+            document.getElementById("session-slots").innerHTML = "";
+            document.getElementById("slot-message").innerText = `Wähle eine Session für Slot ${slotNumber}`;
+            let userGroup = document.getElementById("user-group").value;
+            let sessions = ["PreQ/Data Privacy", "Storytelling", "IT-Trends 2025", "Selling available Project Capacity", "Cold Client Acquisition", "Resilience"];
+           
+            if (userGroup === "R&E") {
+                sessions.push("Territory Management");
+            } else if (userGroup === "S&E") {
+                sessions.push("Financial Deal Management");
+            }
+           
+            sessions.forEach(session => {
+                let button = document.createElement("button");
+                button.innerText = session;
+                button.disabled = isSessionUnavailable(session, slotNumber);
+                button.onclick = function() { bookSession(session, slotNumber); };
+                document.getElementById("session-slots").appendChild(button);
+            });
+        }
+ 
+        function isSessionUnavailable(session, slotNumber) {
+            let userGroup = document.getElementById("user-group").value;
+            if (userGroup === "R&E" && session === "Financial Deal Management") return true;
+            if (userGroup === "S&E" && session === "Territory Management") return true;
+            if (userGroup === "R&E" && !Object.values(sessionSlots).includes(mandatorySession) && slotNumber === 2) return session !== mandatorySession;
+            return Object.values(sessionSlots).includes(session) && sessionSlots[slotNumber] !== session;
+        }
+ 
+        function bookSession(session, slotNumber) {
+            let previousSession = sessionSlots[slotNumber];
+            if (previousSession && previousSession !== session) {
+                delete sessionSlots[slotNumber];
+            }
+            sessionSlots[slotNumber] = session;
+            updateSelectedSessions();
+            checkConfirmButton();
+           
+            if (slotNumber < 4 && !sessionSlots[slotNumber + 1]) {
+                loadSlot(slotNumber + 1);
+            }
+        }
+ 
+        function editSlot(slotNumber) {
+            loadSlot(slotNumber);
+        }
+ 
+        function updateSelectedSessions() {
+            let selectedSessions = document.getElementById("selected-sessions");
+            selectedSessions.innerHTML = `<h3>Deine gebuchten Sessions:</h3>`;
+            for (let i = 1; i <= 4; i++) {
+                if (sessionSlots[i]) {
+                    let sessionElement = document.createElement("p");
+                    sessionElement.innerHTML = `Slot ${i}: ${sessionSlots[i]} <button onclick='editSlot(${i})'>Bearbeiten</button>`;
+                    selectedSessions.appendChild(sessionElement);
+                }
+            }
+            checkConfirmButton();
+        }
+ 
+        function checkConfirmButton() {
+            let userGroup = document.getElementById("user-group").value;
+            let hasMandatorySession = Object.values(sessionSlots).includes(mandatorySession);
+            let allSlotsFilled = Object.values(sessionSlots).every(s => s);
+            if (allSlotsFilled) {
+                document.getElementById("session-selection").style.display = "none";
+            }
+            document.getElementById("confirm-button").style.display = userGroup === "R&E" ? (hasMandatorySession && allSlotsFilled ? "block" : "none") : (allSlotsFilled ? "block" : "none");
+        }
+ 
+        function confirmBooking() {
+            alert("Buchung bestätigt! Sessions: " + JSON.stringify(sessionSlots));
+        }
+    </script>
 </body>
 </html>
