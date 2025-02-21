@@ -3,39 +3,50 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Michael Jackson - Thriller Lyrics</title>
-    <!-- Link to External CSS -->
+    <title>Booking Application</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <h1>Michael Jackson - Thriller</h1>
+    <div class="container">
+        <h1>Breakout Session Booking</h1>
+        <form id="bookingForm">
+            <div class="form-group">
+                <label for="name">Name:</label>
+                <input type="text" id="name" name="name" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="brand">Select Brand:</label>
+                <select id="brand" name="brand" required>
+                    <option value="" disabled selected>Select your brand</option>
+                    <option value="brand1">Brand 1</option>
+                    <option value="brand2">Brand 2</option>
+                </select>
+            </div>
 
-    <div class="verse">
-        <p>It's close to midnight</p>
-        <p>Something evil's lurking from the dark</p>
-        <p>Under the moonlight</p>
-        <p>You see a sight that almost stops your heart</p>
+            <div class="form-group">
+                <label>Choose up to 4 Breakout Sessions:</label>
+                <div class="session-option">
+                    <input type="checkbox" id="session1" name="session" value="Breakout Session 1">
+                    <label for="session1">Breakout Session 1 (<span id="slots-session1">12</span> slots left)</label>
+                </div>
+                <div class="session-option">
+                    <input type="checkbox" id="session2" name="session" value="Breakout Session 2">
+                    <label for="session2">Breakout Session 2 (<span id="slots-session2">12</span> slots left)</label>
+                </div>
+                <div class="session-option">
+                    <input type="checkbox" id="session3" name="session" value="Breakout Session 3">
+                    <label for="session3">Breakout Session 3 (<span id="slots-session3">12</span> slots left)</label>
+                </div>
+                <div class="session-option">
+                    <input type="checkbox" id="session4" name="session" value="Breakout Session 4">
+                    <label for="session4">Breakout Session 4 (<span id="slots-session4">12</span> slots left)</label>
+                </div>
+            </div>
+
+            <button type="submit" class="submit-button">Book Now</button>
+        </form>
     </div>
-
-    <div class="chorus">
-        <p>Cause this is thriller, thriller night</p>
-        <p>There ain't no second chance against the thing with forty eyes, girl</p>
-    </div>
-
-    <div class="verse">
-        <p>You hear the door slam</p>
-        <p>And realize there's nowhere left to run</p>
-        <p>You feel the cold hand</p>
-        <p>And wonder if you'll ever see the sun</p>
-    </div>
-
-    <div class="chorus">
-        <p>Cause this is thriller, thriller night</p>
-        <p>You're fighting for your life inside a killer, thriller tonight</p>
-    </div>
-
-    <footer>
-        <p>&copy; Michael Jackson - Thriller</p>
-    </footer>
+    <script src="script.js"></script>
 </body>
 </html>
