@@ -1,42 +1,42 @@
 <!DOCTYPE html>
-<html lang="de">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Booking Application</title>
     <link rel="stylesheet" href="styles.css">
-    <title>Buchungssystem</title>
-    <style>
-        body { font-family: Arial, sans-serif; padding: 20px; }
-        #booking { display: none; margin-top: 20px; }
-        #session-selection { display: block; }
-        button { margin: 5px; padding: 10px; }
-    </style>
 </head>
 <body>
-    <h1>Buchungssystem</h1>
-   
-    <div id="user-info">
-        <label for="username">Name:</label>
-        <input type="text" id="username" placeholder="Gib deinen Namen ein">
-       
-        <label for="user-group">Bereich:</label>
-        <select id="user-group" onchange="handleGroupChange()">
-            <option value="">-- Wähle deinen Bereich --</option>
-            <option value="S&E">S&E</option>
-            <option value="R&E">R&E</option>
-        </select>
+    <div class="container">
+        <h1>Breakout Session Booking</h1>
+        <form id="bookingForm">
+            <div class="form-group">
+                <label for="name">Name:</label>
+                <input type="text" id="name" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="brand">Select Brand:</label>
+                <select id="brand" required>
+                    <option value="">Select your brand</option>
+                    <option value="S&W">S&W</option>
+                    <option value="brand2">R&E</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label>Choose Breakout Sessions (Max 4):</label>
+                <div>
+                    <input type="checkbox" name="session" value="Breakout Session 1"> Breakout Session 1
+                    <input type="checkbox" name="session" value="Breakout Session 2"> Breakout Session 2
+                    <input type="checkbox" name="session" value="Breakout Session 3"> Breakout Session 3
+                    <input type="checkbox" name="session" value="Breakout Session 4"> Breakout Session 4
+                </div>
+            </div>
+
+            <button type="submit">Book Now</button>
+        </form>
     </div>
-   
-    <div id="booking">
-        <h2>Wähle deine Sessions</h2>
-        <div id="selected-sessions"></div>
-        <div id="session-selection">
-            <p id="slot-message"></p>
-            <div id="session-slots"></div>
-        </div>
-        <button id="confirm-button" style="display: none;" onclick="confirmBooking()">Buchen</button>
-    </div>
- 
     <script src="script.js"></script>
 </body>
 </html>

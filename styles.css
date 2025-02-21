@@ -1,11 +1,11 @@
-/* General Styles */
 body {
     font-family: Arial, sans-serif;
-    background: #f4f4f9;
-    color: #333;
-    padding: 20px;
     display: flex;
     justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background: #f4f4f9;
+    margin: 0;
 }
 
 .container {
@@ -13,147 +13,24 @@ body {
     padding: 20px;
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    max-width: 600px;
     width: 100%;
+    max-width: 400px;
 }
 
 h1 {
     text-align: center;
-    color: #444;
 }
 
-h2, h3 {
-    color: #555;
-}
-
-/* Form Styles */
-#user-info {
-    margin-bottom: 20px;
-}
-
-#user-info label {
-    display: block;
-    margin-bottom: 5px;
-    font-weight: bold;
-}
-
-#user-info input[type="text"],
-#user-info select {
-    width: 100%;
-    padding: 10px;
-    margin-bottom: 15px;
-    box-sizing: border-box;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-}
-
-#user-info select {
-    appearance: none;
-    background: white;
-}
-
-#booking {
-    margin-top: 20px;
-    background: #fff;
-    padding: 15px;
-    border-radius: 10px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-#booking h2 {
-    text-align: center;
-    color: #333;
-}
-
-#selected-sessions {
+.form-group {
     margin-bottom: 15px;
 }
 
-#selected-sessions p {
-    background: #f1f1f1;
-    padding: 10px;
-    border-radius: 5px;
-    margin: 5px 0;
-}
-
-#selected-sessions button {
-    background: #ff6f61;
-    color: white;
-    border: none;
-    border-radius: 3px;
-    padding: 5px 10px;
-    cursor: pointer;
-}
-
-#selected-sessions button:hover {
-    background: #ff5a4c;
-}
-
-/* Session Selection */
-#session-selection {
-    margin-top: 15px;
-}
-
-#slot-message {
-    font-weight: bold;
-    margin-bottom: 10px;
-}
-
-#session-slots {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-}
-
-#session-slots button {
+button {
     background: #4caf50;
     color: white;
+    padding: 10px;
     border: none;
     border-radius: 5px;
-    padding: 10px 15px;
     cursor: pointer;
-    transition: background 0.3s;
-}
-
-#session-slots button:hover {
-    background: #45a049;
-}
-
-#session-slots button:disabled {
-    background: #ccc;
-    cursor: not-allowed;
-}
-
-/* Confirm Button */
-#confirm-button {
-    background: #007bff;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    padding: 10px 20px;
-    cursor: pointer;
-    display: block;
     width: 100%;
-    margin-top: 20px;
-    transition: background 0.3s;
-}
-
-#confirm-button:hover {
-    background: #0056b3;
-}
-
-#confirm-button:disabled {
-    background: #ccc;
-    cursor: not-allowed;
-}
-
-/* Responsive Design */
-@media (max-width: 600px) {
-    #session-slots {
-        flex-direction: column;
-    }
-
-    #session-slots button {
-        width: 100%;
-    }
 }
