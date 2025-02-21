@@ -1,36 +1,144 @@
+/* Body Styles */
 body {
-    font-family: Arial, sans-serif;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
+    font-family: 'Arial', sans-serif;
     background: #f4f4f9;
+    color: #333;
     margin: 0;
+    padding: 0;
+    min-height: 100vh;
+    display: block;   /* Changed from flex to block */
 }
 
+/* Container Styles */
 .container {
     background: white;
-    padding: 20px;
+    padding: 20px 30px;
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     width: 100%;
-    max-width: 400px;
+    max-width: 500px;
+    margin: 20px auto;  /* Centered below the banner */
 }
+
+/* Banner Styles */
+.banner {
+    width: 100%;
+    text-align: center;
+    margin: 0;
+    padding: 0;
+}
+
+.banner img {
+    width: 100%;
+    height: auto;
+    display: block;
+    margin: 0 auto;
+    border-radius: 0;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+
 
 h1 {
     text-align: center;
+    color: #444;
+    margin-bottom: 20px;
+}
+
+h3 {
+    text-align: center;
+    color: #444;
+    margin-bottom: 20px;
+}
+
+/* Form Styles */
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
 }
 
 .form-group {
-    margin-bottom: 15px;
+    display: flex;
+    flex-direction: column;
 }
 
-button {
+label {
+    font-weight: bold;
+    margin-bottom: 5px;
+    color: #555;
+}
+
+input[type="text"],
+select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+    font-size: 1em;
+    transition: border 0.3s;
+}
+
+input[type="text"]:focus,
+select:focus {
+    border-color: #4caf50;
+    outline: none;
+}
+
+select {
+    appearance: none;
+    background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="%23cccccc" d="M7 10l5 5 5-5z"/></svg>') no-repeat right 10px center;
+    background-size: 12px;
+}
+
+/* Dropdown Arrow Fix for Firefox */
+select::-ms-expand {
+    display: none;
+}
+
+/* Button Styles */
+button[type="submit"] {
     background: #4caf50;
     color: white;
-    padding: 10px;
     border: none;
     border-radius: 5px;
+    padding: 10px;
     cursor: pointer;
-    width: 100%;
+    font-size: 1em;
+    transition: background 0.3s;
+}
+
+button[type="submit"]:hover {
+    background: #45a049;
+}
+
+button[type="submit"]:disabled {
+    background: #ccc;
+    cursor: not-allowed;
+}
+
+/* Responsive Design */
+@media (max-width: 600px) {
+    .container {
+        padding: 15px 20px;
+    }
+
+    button[type="submit"] {
+        font-size: 0.9em;
+        padding: 8px;
+    }
+}
+
+label[for="Info"] {
+    display: block;
+    font-size: 0.9em;
+    color: #666;
+    background: #fff9c4;
+    border-left: 4px solid #ffeb3b;
+    padding: 10px 15px;
+    margin: 10px 0;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    animation: fadeIn 1s ease-in-out;
 }

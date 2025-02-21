@@ -6,36 +6,64 @@
     <title>Booking Application</title>
     <link rel="stylesheet" href="styles.css">
 </head>
+<header>
+    <div class="banner">
+        <div class="banner-bg"></div>  <!-- Blurred Background -->
+        <img src="TSF2025_banner.png" alt="Breakout Session Banner">
+    </div>
+    
+</header>
 <body>
     <div class="container">
         <h1>Breakout Session Booking</h1>
         <form id="bookingForm">
             <div class="form-group">
-                <label for="name">Name:</label>
-                <input type="text" id="name" required>
+                <label for="name">Your Name:</label>
+                <input type="text" id="name" placeholder="Your wonderful name" required>
             </div>
             
             <div class="form-group">
-                <label for="brand">Select Brand:</label>
+                <label for="brand">Select your Division Branch:</label>
                 <select id="brand" required>
-                    <option value="">Select your brand</option>
-                    <option value="S&W">S&W</option>
-                    <option value="brand2">R&E</option>
+                    <option value="">Select ...</option>
+                    <option value="R&E">R&E</option>
+                    <option value="S&E">S&E</option>
                 </select>
             </div>
-
+        
+            <h3>Breakout Sessions</h3>
+            
             <div class="form-group">
-                <label>Choose Breakout Sessions (Max 4):</label>
-                <div>
-                    <input type="checkbox" name="session" value="Breakout Session 1"> Breakout Session 1
-                    <input type="checkbox" name="session" value="Breakout Session 2"> Breakout Session 2
-                    <input type="checkbox" name="session" value="Breakout Session 3"> Breakout Session 3
-                    <input type="checkbox" name="session" value="Breakout Session 4"> Breakout Session 4
-                </div>
+                <label for="slot1">Breakout Session #1:</label>
+                <select id="slot1" class="topic-select" required>
+                    <option value="">Select a topic ...</option>
+                </select>
             </div>
-
+        
+            <div class="form-group">
+                <label for="slot2">Breakout Session #2:</label>
+                <select id="slot2" class="topic-select" required>
+                    <option value="">Select a topic ...</option>
+                </select>
+            </div>
+        
+            <div class="form-group">
+                <label for="slot3">Breakout Session #3:</label>
+                <select id="slot3" class="topic-select" required>
+                    <option value="">Select a topic ...</option>
+                </select>
+            </div>
+        
+            <div class="form-group">
+                <label for="slot4">Breakout Session #4:</label>
+                <select id="slot4" class="topic-select" required>
+                    <option value="">Select a topic ...</option>
+                </select>
+            </div>
+            <label for="Info">It may take a few seconds to register your booking. Please wait for your confirmation.</label>
             <button type="submit">Book Now</button>
         </form>
+        
     </div>
     <script src="script.js"></script>
 </body>
