@@ -6,6 +6,13 @@ document.addEventListener("DOMContentLoaded", function () {
     updateTopicsBasedOnBrand();
   });
 
+  // Add Event Listeners to All Dropdowns
+  document.querySelectorAll(".topic-select").forEach((select) => {
+    select.addEventListener("change", function () {
+      preventDuplicateSelections();
+    });
+  });
+
   document
     .getElementById("bookingForm")
     .addEventListener("submit", function (event) {
@@ -32,14 +39,17 @@ document.addEventListener("DOMContentLoaded", function () {
         selections: selections,
       };
 
-      fetch("https://script.google.com/macros/s/AKfycbz4p4jFmlqcTF_pnYRpGFnR5DzOpPXa989n4HAtx-xeBBYuKDh13p9x37EghhrMN-DG_g/exec", {
-        method: "POST",
-        mode: "no-cors",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(data),
-      })
+      fetch(
+        "https://script.google.com/macros/s/AKfycbz4p4jFmlqcTF_pnYRpGFnR5DzOpPXa989n4HAtx-xeBBYuKDh13p9x37EghhrMN-DG_g/exec",
+        {
+          method: "POST",
+          mode: "no-cors",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(data),
+        }
+      )
         .then(() => {
           alert("Booking successful!");
           location.reload();
@@ -111,7 +121,10 @@ function updateTopicsBasedOnBrand() {
         }
       }
       // Disable and Hide Topic 2 for Brand 2
-      else if (brand === "S&E / Delivery" && option.value === "Territory Management") {
+      else if (
+        brand === "S&E / Delivery" &&
+        option.value === "Territory Management"
+      ) {
         option.style.display = "none";
         option.disabled = true;
         if (select.value === "Territory Management") {
@@ -152,7 +165,10 @@ function enforceMandatoryTopic() {
   // If Brand 1 is selected, make Topic 1 mandatory
   if (brand === "R&E") {
     // Check if Topic 1 is selected in Slot 1 or Slot 2
-    if (slot1.value !== "Territory Management" && slot2.value !== "Territory Management") {
+    if (
+      slot1.value !== "Territory Management" &&
+      slot2.value !== "Territory Management"
+    ) {
       alert(
         "As R&E user, you must select Territory Management at least once in Breakout Session 1 or Breakout Session 2."
       );
@@ -160,4 +176,30 @@ function enforceMandatoryTopic() {
     }
   }
   return true;
+}
+
+// Prevent Duplicate Topic Selection Across Slots with Tooltips
+function preventDuplicateSelections() {
+  // Get all dropdowns for slots
+  const allSelects = document.querySelectorAll('.topic-select');
+
+  // Collect selected values
+  const selectedValues = Array.from(allSelects).map(select => select.value);
+
+  // Loop through each dropdown
+  allSelects.forEach(select => {
+      // Loop through each option in the dropdown
+      Array.from(select.options).forEach(option => {
+          // Enable all options initially
+          option.disabled = false;
+
+          // Disable the option if it's selected in another dropdown
+          if (option.value && selectedValues.includes(option.value)) {
+              // Keep the option enabled in the current dropdown if it's the selected value
+              if (select.value !== option.value) {
+                  option.disabled = true;
+              }
+          }
+      });
+  });
 }
