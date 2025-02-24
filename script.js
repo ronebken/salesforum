@@ -111,7 +111,7 @@ function updateTopicsBasedOnBrand() {
         }
       }
       // Disable and Hide Topic 2 for Brand 2
-      else if (brand === "S&E" && option.value === "Territory Management") {
+      else if (brand === "S&E / Delivery" && option.value === "Territory Management") {
         option.style.display = "none";
         option.disabled = true;
         if (select.value === "Territory Management") {
