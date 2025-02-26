@@ -123,11 +123,11 @@ function updateTopicsBasedOnBrand() {
       // Disable and Hide Topic 2 for Brand 2
       else if (
         brand === "S&E / Delivery" &&
-        option.value === "Territory Management"
+        option.value === "Territory Management (FOR R&E)"
       ) {
         option.style.display = "none";
         option.disabled = true;
-        if (select.value === "Territory Management") {
+        if (select.value === "Territory Management (FOR R&E)") {
           select.value = ""; // Reset if Topic 2 was previously selected
         }
       } else {
@@ -166,8 +166,8 @@ function enforceMandatoryTopic() {
   if (brand === "R&E") {
     // Check if Topic 1 is selected in Slot 1 or Slot 2
     if (
-      slot1.value !== "Territory Management" &&
-      slot2.value !== "Territory Management"
+      slot1.value !== "Territory Management (FOR R&E)" &&
+      slot2.value !== "Territory Management (FOR R&E)"
     ) {
       alert(
         "As R&E user, you must select Territory Management at least once in Breakout Session 1 or Breakout Session 2."
