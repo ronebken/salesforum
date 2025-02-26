@@ -143,6 +143,19 @@ label[for="Info"] {
     animation: fadeIn 1s ease-in-out;
 }
 
+label[for="Contact"] {
+    display: block;
+    font-size: 0.9em;
+    color: #666;
+    background: #fff9c4;
+    border-left: 4px solid #ffeb3b;
+    padding: 10px 15px;
+    margin: 10px 0;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    animation: fadeIn 1s ease-in-out;
+}
+
 select option:disabled {
     color: #999;
     background: #f4f4f4;
