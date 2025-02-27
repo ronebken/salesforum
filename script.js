@@ -6,12 +6,12 @@ document.addEventListener("DOMContentLoaded", function () {
     updateTopicsBasedOnBrand();
   });
 
-  // Add Event Listeners to All Dropdowns
-  document.querySelectorAll(".topic-select").forEach((select) => {
-    select.addEventListener("change", function () {
-      preventDuplicateSelections();
-    });
-  });
+  // // Add Event Listeners to All Dropdowns
+  // document.querySelectorAll(".topic-select").forEach((select) => {
+  //   select.addEventListener("change", function () {
+  //     preventDuplicateSelections();
+  //   });
+  // });
 
   document
     .getElementById("bookingForm")
