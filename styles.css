@@ -6,7 +6,8 @@ body {
     margin: 0;
     padding: 0;
     min-height: 100vh;
-    display: block;   /* Changed from flex to block */
+    display: block;
+    /* Changed from flex to block */
 }
 
 /* Container Styles */
@@ -17,7 +18,8 @@ body {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     width: 100%;
     max-width: 500px;
-    margin: 20px auto;  /* Centered below the banner */
+    margin: 20px auto;
+    /* Centered below the banner */
 }
 
 /* Banner Styles */
@@ -159,4 +161,40 @@ label[for="Contact"] {
 select option:disabled {
     color: #999;
     background: #f4f4f4;
+}
+
+/* Popup Banner Styles */
+.popup-banner {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: #ff9800;
+    /* Orange warning color */
+    color: white;
+    text-align: center;
+    padding: 15px;
+    font-size: 1.2em;
+    font-weight: bold;
+    z-index: 1000;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    display: none;
+    /* Hidden by default */
+}
+
+.popup-banner.visible {
+    display: block;
+    animation: slideDown 0.5s ease-out;
+}
+
+@keyframes slideDown {
+    from {
+        top: -50px;
+        opacity: 0;
+    }
+
+    to {
+        top: 0;
+        opacity: 1;
+    }
 }

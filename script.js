@@ -1,30 +1,19 @@
 document.addEventListener("DOMContentLoaded", function () {
   loadTopics(); // Fetch and display available topics
 
-  // Listen for changes on the brand dropdown
-  document.getElementById("brand").addEventListener("change", function () {
-    updateTopicsBasedOnBrand();
+  // Add Event Listeners to All Dropdowns
+  document.querySelectorAll(".topic-select").forEach((select) => {
+    select.addEventListener("change", function () {
+      preventDuplicateSelections();
+    });
   });
-
-  // // Add Event Listeners to All Dropdowns
-  // document.querySelectorAll(".topic-select").forEach((select) => {
-  //   select.addEventListener("change", function () {
-  //     preventDuplicateSelections();
-  //   });
-  // });
 
   document
     .getElementById("bookingForm")
     .addEventListener("submit", function (event) {
       event.preventDefault();
 
-      // Check if mandatory topic is selected
-      if (!enforceMandatoryTopic()) {
-        return; // Stop form submission if validation fails
-      }
-
       const name = document.getElementById("name").value;
-      const brand = document.getElementById("brand").value;
 
       const selections = [
         { slot: "Slot 1", topic: document.getElementById("slot1").value },
@@ -35,9 +24,12 @@ document.addEventListener("DOMContentLoaded", function () {
 
       const data = {
         name: name,
-        brand: brand,
         selections: selections,
       };
+
+      // Show processing banner
+      const banner = document.getElementById("processingBanner");
+      banner.classList.add("visible");
 
       fetch(
         "https://script.google.com/macros/s/AKfycbz4p4jFmlqcTF_pnYRpGFnR5DzOpPXa989n4HAtx-xeBBYuKDh13p9x37EghhrMN-DG_g/exec",
@@ -51,11 +43,13 @@ document.addEventListener("DOMContentLoaded", function () {
         }
       )
         .then(() => {
+          // Banner will persist until alert is dismissed and page reloads
           alert("Booking successful!");
           location.reload();
         })
         .catch((error) => {
           console.error("Error:", error);
+          banner.classList.remove("visible"); // Hide banner on error
           alert("An error occurred. Please try again.");
         });
     });
@@ -98,46 +92,11 @@ function loadTopics() {
       });
 
       // Update visibility and disable fully booked topics
-      updateTopicsBasedOnBrand();
       disableFullyBookedTopics();
     })
     .catch((error) => {
       console.error("Error fetching topics:", error);
     });
-}
-
-// Hide and Disable Topics Based on Brand Selection
-function updateTopicsBasedOnBrand() {
-  const brand = document.getElementById("brand").value;
-
-  document.querySelectorAll(".topic-select").forEach((select) => {
-    select.querySelectorAll("option").forEach((option) => {
-      // Disable and Hide Topic 1 for Brand 1
-      if (brand === "R&E" && option.value === "Financial Deal Management") {
-        option.style.display = "none";
-        option.disabled = true;
-        if (select.value === "Financial Deal Management") {
-          select.value = ""; // Reset if Topic 1 was previously selected
-        }
-      }
-      // Disable and Hide Topic 2 for Brand 2
-      else if (
-        brand === "S&E / Delivery" &&
-        option.value === "Territory Management (FOR R&E)"
-      ) {
-        option.style.display = "none";
-        option.disabled = true;
-        if (select.value === "Territory Management (FOR R&E)") {
-          select.value = ""; // Reset if Topic 2 was previously selected
-        }
-      } else {
-        option.style.display = "block";
-        option.disabled = false; // Enable other options
-      }
-    });
-  });
-  // Re-check fully booked topics after updating visibility
-  disableFullyBookedTopics();
 }
 
 // Disable Topics with 0 Slots Left
@@ -156,28 +115,6 @@ function disableFullyBookedTopics() {
   });
 }
 
-// Enforce Mandatory Topic 1 Selection for Brand 1
-function enforceMandatoryTopic() {
-  const brand = document.getElementById("brand").value;
-  const slot1 = document.getElementById("slot1");
-  const slot2 = document.getElementById("slot2");
-
-  // If Brand 1 is selected, make Topic 1 mandatory
-  if (brand === "R&E") {
-    // Check if Topic 1 is selected in Slot 1 or Slot 2
-    if (
-      slot1.value !== "Territory Management (FOR R&E)" &&
-      slot2.value !== "Territory Management (FOR R&E)"
-    ) {
-      alert(
-        "As R&E user, you must select Territory Management at least once in Breakout Session 1 or Breakout Session 2."
-      );
-      return false;
-    }
-  }
-  return true;
-}
-
 // Prevent Duplicate Topic Selection Across Slots with Tooltips
 function preventDuplicateSelections() {
   // Get all dropdowns for slots
@@ -188,18 +125,18 @@ function preventDuplicateSelections() {
 
   // Loop through each dropdown
   allSelects.forEach(select => {
-      // Loop through each option in the dropdown
-      Array.from(select.options).forEach(option => {
-          // Enable all options initially
-          option.disabled = false;
+    // Loop through each option in the dropdown
+    Array.from(select.options).forEach(option => {
+      // Enable all options initially
+      option.disabled = false;
 
-          // Disable the option if it's selected in another dropdown
-          if (option.value && selectedValues.includes(option.value)) {
-              // Keep the option enabled in the current dropdown if it's the selected value
-              if (select.value !== option.value) {
-                  option.disabled = true;
-              }
-          }
-      });
+      // Disable the option if it's selected in another dropdown
+      if (option.value && selectedValues.includes(option.value)) {
+        // Keep the option enabled in the current dropdown if it's the selected value
+        if (select.value !== option.value) {
+          option.disabled = true;
+        }
+      }
+    });
   });
 }

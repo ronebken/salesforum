@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,64 +9,61 @@
 </head>
 <header>
     <div class="banner">
-        <div class="banner-bg"></div>  <!-- Blurred Background -->
-        <img src="TSF2025_banner.png" alt="Breakout Session Banner">
+        <div class="banner-bg"></div> <!-- Blurred Background -->
+        <img src="TSF2026_banner.png" alt="Breakout Session Banner">
     </div>
-    
+
 </header>
+
 <body>
     <div class="container">
-        <h1>Breakout Session Booking</h1>
+        <h1>Partner & Breakout Session Booking</h1>
         <form id="bookingForm">
             <div class="form-group">
                 <label for="name">Your Name:</label>
                 <input type="text" id="name" placeholder="Your wonderful name" required>
             </div>
-            
+
+            <h3>Partner & Breakout Sessions</h3>
+
             <div class="form-group">
-                <label for="brand">Select your Division Branch:</label>
-                <select id="brand" required>
-                    <option value="">Select ...</option>
-                    <option value="R&E">R&E</option>
-                    <option value="S&E / Delivery">S&E / Delivery</option>
-                </select>
-            </div>
-        
-            <h3>Breakout Sessions</h3>
-            
-            <div class="form-group">
-                <label for="slot1">Breakout Session #1:</label>
+                <label for="slot1">Partner Session #1:</label>
                 <select id="slot1" class="topic-select" required>
                     <option value="">Select a topic ...</option>
                 </select>
             </div>
-        
+
             <div class="form-group">
-                <label for="slot2">Breakout Session #2:</label>
+                <label for="slot2">Partner Session #2:</label>
                 <select id="slot2" class="topic-select" required>
                     <option value="">Select a topic ...</option>
                 </select>
             </div>
-        
+
             <div class="form-group">
-                <label for="slot3">Breakout Session #3:</label>
+                <label for="slot3">Breakout Session #1:</label>
                 <select id="slot3" class="topic-select" required>
                     <option value="">Select a topic ...</option>
                 </select>
             </div>
-        
+
             <div class="form-group">
-                <label for="slot4">Breakout Session #4:</label>
+                <label for="slot4">Breakout Session #2:</label>
                 <select id="slot4" class="topic-select" required>
                     <option value="">Select a topic ...</option>
                 </select>
             </div>
-            <label for="Info">It may take a few seconds to register your booking. Please wait for your confirmation.</label>
+            <label for="Info">It may take a few seconds to register your booking. Please wait for your
+                confirmation.</label>
             <button type="submit">Book Now</button>
             <label for="Contact">Questions or problems? Slack: Ron Ebken - ron.ebken@ibm.com</label>
         </form>
-        
+
+    </div>
+    <div id="processingBanner" class="popup-banner">
+        Please wait up to 5 seconds for the confirmation popup.
     </div>
     <script src="script.js"></script>
 </body>
+
 </html>
