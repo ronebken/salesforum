@@ -1,25 +1,22 @@
 /* Body Styles */
 body {
-    font-family: 'ibm Plex Sans';
-    background: #f4f4f9;
-    color: #333;
+    font-family: 'IBM Plex Sans', sans-serif;
+    background: #FFFFFF;
+    color: #000000;
     margin: 0;
     padding: 0;
     min-height: 100vh;
     display: block;
-    /* Changed from flex to block */
 }
 
 /* Container Styles */
 .container {
     background: white;
-    padding: 20px 30px;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    padding: 40px 20px;
     width: 100%;
-    max-width: 500px;
-    margin: 20px auto;
-    /* Centered below the banner */
+    max-width: 800px;
+    margin: 0 auto;
+    /* Removed shadow and radius for flat design */
 }
 
 /* Banner Styles */
@@ -39,25 +36,36 @@ body {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
+/* Banner Background Blur - likely unnecessary with the new gradient design, removing specific bg div if not needed, 
+   but keeping the class structure valid just in case structure relies on it. */
+.banner-bg {
+    display: none;
+}
 
 
 h1 {
     text-align: center;
-    color: #444;
-    margin-bottom: 20px;
+    color: #000000;
+    margin-bottom: 40px;
+    font-weight: 700;
 }
 
 h3 {
-    text-align: center;
-    color: #444;
+    text-align: left;
+    color: #000000;
+    margin-top: 40px;
     margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid #F2F2F2;
+    font-size: 1.5em;
+    font-weight: 700;
 }
 
 /* Form Styles */
 form {
     display: flex;
     flex-direction: column;
-    gap: 15px;
+    gap: 20px;
 }
 
 .form-group {
@@ -66,32 +74,39 @@ form {
 }
 
 label {
-    font-weight: bold;
-    margin-bottom: 5px;
-    color: #555;
+    font-weight: 600;
+    margin-bottom: 8px;
+    color: #161616;
+    /* Darker grey/black for better contrast */
 }
 
 input[type="text"],
 select {
     width: 100%;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
+    padding: 12px 15px;
+    border: 1px solid #8D8D8D;
+    /* IBM Cool Gray 60 */
+    border-radius: 0;
+    /* Sharp corners */
     box-sizing: border-box;
-    font-size: 1em;
-    transition: border 0.3s;
+    font-size: 1rem;
+    transition: border 0.2s, outline 0.2s;
+    background-color: #F4F4F4;
+    /* Light gray input background */
 }
 
 input[type="text"]:focus,
 select:focus {
-    border-color: #4caf50;
+    border: 2px solid #0F62FE;
+    /* IBM Blue 60 */
     outline: none;
+    background-color: #FFFFFF;
 }
 
 select {
     appearance: none;
-    background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="%23cccccc" d="M7 10l5 5 5-5z"/></svg>') no-repeat right 10px center;
-    background-size: 12px;
+    background: #F4F4F4 url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16"><path fill="%23161616" d="M8 11L3 6 3.7 5.3 8 9.6 12.3 5.3 13 6z"/></svg>') no-repeat right 15px center;
+    background-size: 16px;
 }
 
 /* Dropdown Arrow Fix for Firefox */
@@ -101,63 +116,54 @@ select::-ms-expand {
 
 /* Button Styles */
 button[type="submit"] {
-    background: #4caf50;
+    background: #0F62FE;
+    /* IBM Blue 60 */
     color: white;
     border: none;
-    border-radius: 5px;
-    padding: 10px;
+    border-radius: 0;
+    /* Sharp corners */
+    padding: 16px 24px;
     cursor: pointer;
-    font-size: 1em;
-    transition: background 0.3s;
+    font-size: 1rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    /* Optional: matches some corporate styles */
+    transition: background 0.2s;
+    width: 100%;
+    margin-top: 20px;
 }
 
 button[type="submit"]:hover {
-    background: #45a049;
+    background: #0043CE;
+    /* IBM Blue 70 */
 }
 
 button[type="submit"]:disabled {
-    background: #ccc;
+    background: #C6C6C6;
     cursor: not-allowed;
 }
 
-/* Responsive Design */
-@media (max-width: 600px) {
-    .container {
-        padding: 15px 20px;
-    }
-
-    button[type="submit"] {
-        font-size: 0.9em;
-        padding: 8px;
-    }
-}
-
-label[for="Info"] {
-    display: block;
-    font-size: 0.9em;
-    color: #666;
-    background: #fff9c4;
-    border-left: 4px solid #ffeb3b;
-    padding: 10px 15px;
-    margin: 10px 0;
-    border-radius: 5px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    animation: fadeIn 1s ease-in-out;
-}
-
+/* Info Labels */
+label[for="Info"],
 label[for="Contact"] {
     display: block;
     font-size: 0.9em;
-    color: #666;
-    background: #fff9c4;
-    border-left: 4px solid #ffeb3b;
-    padding: 10px 15px;
+    color: #161616;
+    background: #E0E0E0;
+    /* Neutral gray instead of yellow */
+    border-left: 4px solid #0F62FE;
+    padding: 12px 16px;
     margin: 10px 0;
-    border-radius: 5px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    animation: fadeIn 1s ease-in-out;
+    border-radius: 0;
+    box-shadow: none;
 }
 
+label[for="Contact"] {
+    margin-top: 30px;
+}
+
+
+/* Disabled Options */
 select option:disabled {
     color: #999;
     background: #f4f4f4;
@@ -169,17 +175,16 @@ select option:disabled {
     top: 0;
     left: 0;
     width: 100%;
-    background-color: #ff9800;
-    /* Orange warning color */
+    background-color: #0F62FE;
+    /* Blue to match theme */
     color: white;
     text-align: center;
     padding: 15px;
-    font-size: 1.2em;
-    font-weight: bold;
+    font-size: 1rem;
+    font-weight: 600;
     z-index: 1000;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     display: none;
-    /* Hidden by default */
 }
 
 .popup-banner.visible {
@@ -199,18 +204,18 @@ select option:disabled {
     }
 }
 
+/* Responsive Design */
 @media (min-width: 768px) {
     .container {
-        max-width: 800px;
-        padding: 40px 50px;
+        padding: 60px 0;
+        /* More vertical breath */
     }
 
     form {
         display: grid;
         grid-template-columns: 1fr 1fr;
-        gap: 25px;
-        align-items: end;
-        /* Aligns inputs nicely if labels differ in height, though mainly for polish */
+        gap: 30px;
+        /* Wider gap */
     }
 
     /* Full width elements */
@@ -223,39 +228,9 @@ select option:disabled {
         grid-column: 1 / -1;
     }
 
-    .form-group {
-        width: 100%;
-        /* Ensure they take up the grid cell */
-    }
-
-    /* Typography Scaling */
     h1 {
-        font-size: 2.5em;
-        margin-bottom: 30px;
-    }
-
-    h3 {
-        font-size: 1.5em;
-        margin-top: 10px;
-        margin-bottom: 10px;
-        border-bottom: 2px solid #eee;
-        padding-bottom: 10px;
-    }
-
-    label {
-        font-size: 1.1em;
-    }
-
-    input[type="text"],
-    select {
-        font-size: 1.1em;
-        padding: 12px;
-    }
-
-    button[type="submit"] {
-        font-size: 1.25em;
-        padding: 15px;
-        margin-top: 10px;
+        font-size: 3rem;
+        /* Larger */
     }
 }
 
@@ -263,31 +238,46 @@ select option:disabled {
 #successMessage {
     text-align: center;
     padding: 40px 20px;
-    animation: fadeIn 0.5s;
 }
 
 .success-icon {
     font-size: 4em;
     margin-bottom: 20px;
+    color: #24A148;
+    /* IBM Green 50 for success only */
 }
 
 #successMessage h2 {
-    color: #4caf50;
-    margin-bottom: 10px;
+    color: #161616;
+    margin-bottom: 20px;
+    font-size: 2rem;
 }
 
 #successMessage button {
-    background: #4caf50;
+    background: #0F62FE;
     color: white;
     border: none;
-    padding: 10px 20px;
-    font-size: 1em;
-    border-radius: 5px;
-    cursor: pointer;
-    margin-top: 20px;
+    border-radius: 0;
+    padding: 12px 24px;
+    font-size: 1rem;
 }
 
-/* Utility to toggle visibility */
 .hidden {
     display: none !important;
+}
+
+/* Back Link Styles */
+.back-link {
+    display: inline-block;
+    margin-top: 5px;
+    color: #0F62FE;
+    /* IBM Blue */
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 500;
+}
+
+.back-link:hover {
+    text-decoration: underline;
+    color: #0043CE;
 }
