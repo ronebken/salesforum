@@ -27,15 +27,19 @@ document.addEventListener("DOMContentLoaded", function () {
         selections: selections,
       };
 
-      // Show processing banner
+      // Optimistic UI: Immediately show success
+      document.getElementById("bookingForm").classList.add("hidden");
+      document.getElementById("successMessage").classList.remove("hidden");
+
+      // Hide the lingering processing banner if it was somehow active
       const banner = document.getElementById("processingBanner");
-      banner.classList.add("visible");
+      banner.classList.remove("visible");
 
       fetch(
         "https://script.google.com/macros/s/AKfycbz4p4jFmlqcTF_pnYRpGFnR5DzOpPXa989n4HAtx-xeBBYuKDh13p9x37EghhrMN-DG_g/exec",
         {
           method: "POST",
-          mode: "no-cors",
+          mode: "no-cors", // Important: This means we can't see the response status, hence why we assume success
           headers: {
             "Content-Type": "application/json",
           },
@@ -43,14 +47,16 @@ document.addEventListener("DOMContentLoaded", function () {
         }
       )
         .then(() => {
-          // Banner will persist until alert is dismissed and page reloads
-          alert("Booking successful!");
-          location.reload();
+          // Request completed (successfully sent)
+          // UI is already in success state, so we do nothing here.
+          console.log("Booking data sent silently.");
         })
         .catch((error) => {
           console.error("Error:", error);
-          banner.classList.remove("visible"); // Hide banner on error
-          alert("An error occurred. Please try again.");
+          // Revert UI only if there's a network error (rare)
+          alert("Network error: Could not submit booking. Please try again.");
+          document.getElementById("bookingForm").classList.remove("hidden");
+          document.getElementById("successMessage").classList.add("hidden");
         });
     });
 });

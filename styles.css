@@ -1,6 +1,6 @@
 /* Body Styles */
 body {
-    font-family: 'Arial', sans-serif;
+    font-family: 'ibm Plex Sans';
     background: #f4f4f9;
     color: #333;
     margin: 0;
@@ -197,4 +197,97 @@ select option:disabled {
         top: 0;
         opacity: 1;
     }
+}
+
+@media (min-width: 768px) {
+    .container {
+        max-width: 800px;
+        padding: 40px 50px;
+    }
+
+    form {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 25px;
+        align-items: end;
+        /* Aligns inputs nicely if labels differ in height, though mainly for polish */
+    }
+
+    /* Full width elements */
+    .form-group:nth-of-type(1),
+    /* Name field */
+    h3,
+    label[for="Info"],
+    button[type="submit"],
+    label[for="Contact"] {
+        grid-column: 1 / -1;
+    }
+
+    .form-group {
+        width: 100%;
+        /* Ensure they take up the grid cell */
+    }
+
+    /* Typography Scaling */
+    h1 {
+        font-size: 2.5em;
+        margin-bottom: 30px;
+    }
+
+    h3 {
+        font-size: 1.5em;
+        margin-top: 10px;
+        margin-bottom: 10px;
+        border-bottom: 2px solid #eee;
+        padding-bottom: 10px;
+    }
+
+    label {
+        font-size: 1.1em;
+    }
+
+    input[type="text"],
+    select {
+        font-size: 1.1em;
+        padding: 12px;
+    }
+
+    button[type="submit"] {
+        font-size: 1.25em;
+        padding: 15px;
+        margin-top: 10px;
+    }
+}
+
+/* Success Message Styles */
+#successMessage {
+    text-align: center;
+    padding: 40px 20px;
+    animation: fadeIn 0.5s;
+}
+
+.success-icon {
+    font-size: 4em;
+    margin-bottom: 20px;
+}
+
+#successMessage h2 {
+    color: #4caf50;
+    margin-bottom: 10px;
+}
+
+#successMessage button {
+    background: #4caf50;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 1em;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 20px;
+}
+
+/* Utility to toggle visibility */
+.hidden {
+    display: none !important;
 }
